@@ -98,7 +98,7 @@ You are now ready to use Python and SQLAlchemy to do basic climate analysis and 
  -->
 <center><img src='images/temp_avg.png' height="400px"/></center>
 
-<!-- 
+
 ### Optional Recommended Analysis
 
 * The following are optional challenge queries. These are highly recommended to attempt, but not required for the homework.
@@ -131,7 +131,7 @@ Now that you have completed your initial analysis, design a Flask api based on t
 
   * Query for the dates and temperature observations from the last year.
 
-  * Convert the query results to a Dictionary using `date` as the key and `tobs` as the value.
+  <!-- * Convert the query results to a Dictionary using `date` as the key and `tobs` as the value. -->
 
   * Return the json representation of your dictionary.
 
@@ -149,14 +149,14 @@ Now that you have completed your initial analysis, design a Flask api based on t
 
   * When given the start only, calculate `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.
 
-  * When given the start and the end date, calculate the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive.
+  <!-- * When given the start and the end date, calculate the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive. -->
 
-## Hints
+<!-- ## Hints
 
 * You will need to join the station and measurement tables for some of the analysis queries.
 
-* Use Flask `jsonify` to convert your api data into a valid json response object.
- -->
+* Us -->e Flask `jsonify` to convert your api data into a valid json response object.
+
 ## Copyright
 
 Coding Boot Camp © 2017. All Rights Reserved.
