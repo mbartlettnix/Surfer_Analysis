@@ -69,15 +69,47 @@ def tobsy():
        measurement.date >= '2016-01-01', measurement.date < '2017-01-01').all()
      return jsonify(returns)
 
+
+# Return a json list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
+# When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater than and equal to the start date.
+# When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.
+
 @app.route("/api/v1.0/<start>")
-def starttemp():
-     print("Server received request for start page...")
-     return "data is on its way"
+def temp_input(start):
+	def starttemp(start_date):
+		print("Server received request for start page...")
+		data = pd.DataFrame(session.query(measurement.tobs).\
+		filter(measurement.date >= start_date).all())
+
+		avg = round(data['tobs'].mean())
+		low = data['tobs'].min()
+		high = data['tobs'].max()
+		return avg,low,high
+
+	average,minimum,maximum = starttemp(start)
+	dictionary = {"Minimum_Temp":str(minimum),"Average_Temp": str(average),"Max_Temp":str(maximum)}
+	return jsonify(dictionary)
+
 
 @app.route("/api/v1.0/<start>/<end>")
-def calc_temp():
-     print("Server received request for start/end page...")
-     return "your vacation data is on the way is on its way"
+# create first function to gather inputs from user in address line then pushes them into nested dunction
+def temp_input_end(start,end):
+	def calc_temps(start_date,end_date):
+		print("Server received request for start/end page...")
+		data = pd.DataFrame(session.query(measurement.tobs).\
+		filter(measurement.date >= start_date, measurement.date < end_date).all())
+
+		avg = round(data['tobs'].mean())
+		low = data['tobs'].min()
+		high = data['tobs'].max()
+		return avg,low,high
+
+	average,minimum,maximum = calc_temps(start, end)
+	dictionary = {"Minimum_Temp":str(minimum),"Average_Temp": str(average),"Max_Temp":str(maximum)}
+	return jsonify(dictionary)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
